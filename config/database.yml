@@ -1,0 +1,23 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV["DB_POOL"] || 5  %>
+  database: <%= ENV['DB_NAME'] || 'mycrypto' %>
+  username: <%= ENV['DB_USER'] || 'mycrypto' %>
+  password: <%= ENV['DB_PASS'] %>
+  host: <%= ENV["DB_HOST"] || '127.0.0.1' %>
+  url: <%= ENV['DATABASE_URL'] %> # takes higher precedence than other settings
+  reconnect: true
+
+development:
+  <<: *default
+  database: mycrypto
+
+test:
+  <<: *default
+  database: my_crypto_test
+
+production:
+  <<: *default
+  database: my_crypto_production
+  url: <%= ENV['DATABASE_URL'] %>

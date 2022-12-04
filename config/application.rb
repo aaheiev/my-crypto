@@ -1,8 +1,11 @@
 Jets.application.configure do
   config.project_name = "my-crypto"
-  config.mode = "job"
+  config.mode = "api"
 
-  config.prewarm.enable = false
+  config.prewarm.enable = true # default is true
+  # config.prewarm.rate = '30 minutes' # default is '30 minutes'
+  # config.prewarm.concurrency = 2 # default is 2
+  # config.prewarm.public_ratio = 3 # default is 3
 
   # config.env_extra = 2 # can also set this with JETS_ENV_EXTRA
   # config.autoload_paths = []
@@ -59,4 +62,5 @@ Jets.application.configure do
   # testing suite output readable.
   # config.logger = Jets::Logger.new($stderr)
 
+  config.controllers.default_protect_from_forgery = false
 end

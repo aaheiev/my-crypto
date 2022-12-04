@@ -1,0 +1,51 @@
+---
+version:                      '3.9'
+secrets:
+  db_password:
+    file:                     secrets/db_password
+  binance_api_key:
+    file:                     secrets/binance_api_key
+  binance_secret_key:
+    file:                     secrets/binance_secret_key
+services:
+  database:
+    image:                    timescale/timescaledb:latest-pg14-oss
+    environment:
+      POSTGRES_USER:          mycrypto
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+      POSTGRES_DB:            mycrypto
+    volumes:
+      - ./.database:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    secrets:
+      - db_password
+    healthcheck:
+      test:                   ["CMD", "pg_isready", "-U", "mycrypto"]
+      interval:               5s
+      timeout:                5s
+      retries:                5
+#    restart:                  unless-stopped
+
+#  scheduler:
+#    image:                     aaheiev/sensors:latest
+#    environment:
+#      DB_HOST:                 192.168.118.106
+#      DB_NAME:                 sensors
+#      DB_USER:                 sensors
+#      DB_PASS_FILE:            /run/secrets/db_password
+#      LOCKBOX_MASTER_KEY_FILE: /run/secrets/lockbox_master_key
+#      UBIBOT_ACCOUNT_KEY_FILE: /run/secrets/ubibot_account_key
+#    command:
+#      - clockwork
+#      - scheduler.rb
+#    secrets:
+#      - db_password
+#      - lockbox_master_key
+#      - ubibot_account_key
+#    healthcheck:
+#      test:                    ["CMD", "ps aux | grep scheduler.rb | grep -v grep"]
+#      interval:                5s
+#      timeout:                 5s
+#      retries:                 5
+#    restart:                   unless-stopped
