@@ -1,18 +1,20 @@
 source "https://rubygems.org"
 
 gem "jets", "~> 3.1.0"
-
-
-# Include pg gem if you are using ActiveRecord, remove next line
-# and config/database.yml file if you are not
 gem "pg", "~> 1.2.3"
-
 gem "dynomite"
 gem "zeitwerk", ">= 2.5.0"
+gem 'lockbox'
+gem 'tzinfo-data'
+gem 'composite_primary_keys'
+gem 'binance-connector-ruby'
+
+# gem "faraday"
+# gem 'csv'
+# gem 'colorize'
 
 # development and test groups are not bundled as part of the deployment
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'shotgun'
   gem 'rack'
