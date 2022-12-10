@@ -8,10 +8,9 @@ gem 'lockbox'
 gem 'tzinfo-data'
 gem 'composite_primary_keys'
 gem 'binance-connector-ruby'
+gem 'shoryuken'
 
-# gem "faraday"
 # gem 'csv'
-# gem 'colorize'
 
 # development and test groups are not bundled as part of the deployment
 group :development, :test do

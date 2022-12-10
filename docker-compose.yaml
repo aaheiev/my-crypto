@@ -8,23 +8,30 @@ secrets:
   binance_secret_key:
     file:                     secrets/binance_secret_key
 services:
-  database:
-    image:                    timescale/timescaledb:latest-pg14-oss
-    environment:
-      POSTGRES_USER:          mycrypto
-      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
-      POSTGRES_DB:            mycrypto
-    volumes:
-      - ./.database:/var/lib/postgresql/data
+  sqs:
+#    image: aaheiev/moto-sqs-server
+    build:
+      context: tools/moto-sqs
     ports:
-      - 5432:5432
-    secrets:
-      - db_password
-    healthcheck:
-      test:                   ["CMD", "pg_isready", "-U", "mycrypto"]
-      interval:               5s
-      timeout:                5s
-      retries:                5
+      - 4576:5000
+
+#  database:
+#    image:                    timescale/timescaledb:latest-pg14-oss
+#    environment:
+#      POSTGRES_USER:          mycrypto
+#      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+#      POSTGRES_DB:            mycrypto
+#    volumes:
+#      - ./.database:/var/lib/postgresql/data
+#    ports:
+#      - 5432:5432
+#    secrets:
+#      - db_password
+#    healthcheck:
+#      test:                   ["CMD", "pg_isready", "-U", "mycrypto"]
+#      interval:               5s
+#      timeout:                5s
+#      retries:                5
 #    restart:                  unless-stopped
 
 #  scheduler:

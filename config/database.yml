@@ -11,11 +11,11 @@ default: &default
 
 development:
   <<: *default
-  database: mycrypto
+  database: mycrypto_dev
 
 test:
   <<: *default
-  database: my_crypto_test
+  database: mycrypto_test
 
 production:
   <<: *default

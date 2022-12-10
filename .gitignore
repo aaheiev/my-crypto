@@ -10,5 +10,6 @@ bundled
 coverage
 pkg
 tmp
+.tmp
 secrets
 .database
